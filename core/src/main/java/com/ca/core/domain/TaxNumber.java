@@ -1,5 +1,8 @@
 package com.ca.core.domain;
 
+import com.ca.core.exception.TaxNumberException;
+import com.ca.core.exception.enums.ErrorCodeEnum;
+
 public class TaxNumber {
     private String value;
 
