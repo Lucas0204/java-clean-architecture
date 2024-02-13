@@ -4,6 +4,6 @@ import com.ca.core.domain.TransactionPin;
 import com.ca.core.domain.User;
 import com.ca.core.domain.Wallet;
 
-public interface CreateUserGateway {
-    Boolean create(User user, Wallet wallet, TransactionPin transactionPin);
+public interface UserAuthenticateGateway {
+    Boolean authenticate(String username, String password);
 }

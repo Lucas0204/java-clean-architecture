@@ -1,7 +1,8 @@
 package com.ca.usecase;
 
 import com.ca.core.domain.Transaction;
+import com.ca.core.exception.TransactionException;
 
 public interface CreateTransactionUseCase {
-    void create(Transaction transaction);
+    Transaction create(Transaction transaction) throws TransactionException;
 }
