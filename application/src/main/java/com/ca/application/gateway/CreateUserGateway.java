@@ -5,5 +5,5 @@ import com.ca.core.domain.User;
 import com.ca.core.domain.Wallet;
 
 public interface CreateUserGateway {
-    Boolean create(User user, Wallet wallet, TransactionPin transactionPin);
+    Boolean create(User user, Wallet wallet);
 }

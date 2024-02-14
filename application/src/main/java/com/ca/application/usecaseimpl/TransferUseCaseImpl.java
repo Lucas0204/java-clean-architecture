@@ -5,6 +5,7 @@ import com.ca.core.domain.Transaction;
 import com.ca.core.domain.Wallet;
 import com.ca.core.exception.NotFoundException;
 import com.ca.core.exception.NotificationException;
+import com.ca.core.exception.TransactionException;
 import com.ca.core.exception.TransferException;
 import com.ca.core.exception.enums.ErrorCodeEnum;
 import com.ca.usecase.*;
@@ -17,23 +18,32 @@ public class TransferUseCaseImpl implements TransferUseCase {
     private final ValidateTransactionUseCase validateTransactionUseCase;
     private final TransferGateway transferGateway;
     private final UserNotificationUseCase userNotificationUseCase;
+    private final ValidateTransactionPinUseCase validateTransactionPinUseCase;
 
     public TransferUseCaseImpl(FindWalletByTaxNumberUseCase findWalletByTaxNumberUseCase,
                                CreateTransactionUseCase createTransactionUseCase,
                                ValidateTransactionUseCase validateTransactionUseCase,
                                TransferGateway transferGateway,
-                               UserNotificationUseCase userNotificationUseCase) {
+                               UserNotificationUseCase userNotificationUseCase,
+                               ValidateTransactionPinUseCase validateTransactionPinUseCase) {
         this.findWalletByTaxNumberUseCase = findWalletByTaxNumberUseCase;
         this.createTransactionUseCase = createTransactionUseCase;
         this.validateTransactionUseCase = validateTransactionUseCase;
         this.transferGateway = transferGateway;
         this.userNotificationUseCase = userNotificationUseCase;
+        this.validateTransactionPinUseCase = validateTransactionPinUseCase;
     }
 
     @Override
-    public Boolean transfer(String fromTaxNumber, String toTaxNumber, BigDecimal value) throws TransferException, NotFoundException, NotificationException {
+    public Boolean transfer(String fromTaxNumber, String toTaxNumber, BigDecimal value) throws TransferException, NotFoundException, NotificationException, TransactionException {
         Wallet from = findWalletByTaxNumberUseCase.findWalletByTaxNumber(fromTaxNumber);
         Wallet to = findWalletByTaxNumberUseCase.findWalletByTaxNumber(fromTaxNumber);
+
+        if (from.getTransactionPin().getBlocked()) {
+            throw new TransferException(ErrorCodeEnum.PIN0001.getMessage(), ErrorCodeEnum.PIN0001.getCode());
+        }
+
+        validateTransactionPinUseCase.validate(from.getTransactionPin());
 
         from.transfer(value);
         to.receiveValue(value);

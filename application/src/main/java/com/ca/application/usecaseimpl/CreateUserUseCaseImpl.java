@@ -36,9 +36,8 @@ public class CreateUserUseCaseImpl implements CreateUserUseCase {
             throw new TaxNumberException(ErrorCodeEnum.ON0002.getMessage(), ErrorCodeEnum.ON0002.getCode());
         }
 
-        var userWallet = new Wallet(BigDecimal.ZERO, user);
-        var userTransactionPin = new TransactionPin(user, pin);
-        Boolean userCreated = createUserGateway.create(user, userWallet, userTransactionPin);
+        var userWallet = new Wallet(BigDecimal.ZERO, new TransactionPin(pin), user);
+        Boolean userCreated = createUserGateway.create(user, userWallet);
 
         if (!userCreated) {
             throw new CreateUserException(ErrorCodeEnum.ON0004.getMessage(), ErrorCodeEnum.ON0004.getCode());

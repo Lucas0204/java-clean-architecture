@@ -7,16 +7,14 @@ import java.time.LocalDateTime;
 
 public class TransactionPin {
     private Long id;
-    private User user;
     private String pin;
     private Integer attempt;
     private Boolean blocked;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public TransactionPin(Long id, User user, String pin, Integer attempt, Boolean blocked, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public TransactionPin(Long id, String pin, Integer attempt, Boolean blocked, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
-        this.user = user;
         this.pin = pin;
         this.attempt = attempt;
         this.blocked = blocked;
@@ -24,8 +22,7 @@ public class TransactionPin {
         this.updatedAt = updatedAt;
     }
 
-    public TransactionPin(User user, String pin) throws TransactionPinException {
-        this.user = user;
+    public TransactionPin(String pin) throws TransactionPinException {
         setPin(pin);
         this.attempt = 3;
         this.blocked = Boolean.FALSE;
@@ -41,14 +38,6 @@ public class TransactionPin {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getPin() {

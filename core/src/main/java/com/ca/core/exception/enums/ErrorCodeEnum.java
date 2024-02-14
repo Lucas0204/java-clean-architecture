@@ -17,7 +17,8 @@ public enum ErrorCodeEnum {
 
     WA0001("Wallet not found", "WA0001"),
     NF0001("Fail to send user notification", "NF0001"),
-    AUTH0001("Fail to authenticate user", "AUTH0001");
+    AUTH0001("Fail to authenticate user", "AUTH0001"),
+    PIN0001("Transaction pin blocked", "PIN0001");
 
     private String message;
     private String code;
