@@ -3,10 +3,7 @@ package com.ca.application.usecaseimpl;
 import com.ca.application.gateway.TransferGateway;
 import com.ca.core.domain.Transaction;
 import com.ca.core.domain.Wallet;
-import com.ca.core.exception.NotFoundException;
-import com.ca.core.exception.NotificationException;
-import com.ca.core.exception.TransactionException;
-import com.ca.core.exception.TransferException;
+import com.ca.core.exception.*;
 import com.ca.core.exception.enums.ErrorCodeEnum;
 import com.ca.usecase.*;
 
@@ -35,13 +32,9 @@ public class TransferUseCaseImpl implements TransferUseCase {
     }
 
     @Override
-    public Boolean transfer(String fromTaxNumber, String toTaxNumber, BigDecimal value) throws TransferException, NotFoundException, NotificationException, TransactionException {
+    public Boolean transfer(String fromTaxNumber, String toTaxNumber, BigDecimal value) throws TransferException, NotFoundException, NotificationException, TransactionException, PinException {
         Wallet from = findWalletByTaxNumberUseCase.findWalletByTaxNumber(fromTaxNumber);
         Wallet to = findWalletByTaxNumberUseCase.findWalletByTaxNumber(fromTaxNumber);
-
-        if (from.getTransactionPin().getBlocked()) {
-            throw new TransferException(ErrorCodeEnum.PIN0001.getMessage(), ErrorCodeEnum.PIN0001.getCode());
-        }
 
         validateTransactionPinUseCase.validate(from.getTransactionPin());
 

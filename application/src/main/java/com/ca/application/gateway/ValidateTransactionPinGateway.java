@@ -4,5 +4,5 @@ import com.ca.core.domain.TransactionPin;
 import com.ca.core.exception.TransferException;
 
 public interface ValidateTransactionPinGateway {
-    Boolean validate(TransactionPin transactionPin) throws TransferException;
+    Boolean validate(TransactionPin transactionPin);
 }

@@ -18,7 +18,8 @@ public enum ErrorCodeEnum {
     WA0001("Wallet not found", "WA0001"),
     NF0001("Fail to send user notification", "NF0001"),
     AUTH0001("Fail to authenticate user", "AUTH0001"),
-    PIN0001("Transaction pin blocked", "PIN0001");
+    PIN0001("Transaction pin blocked", "PIN0001"),
+    PIN0002("Incorrect pin. Remaining attempts: %d", "PIN0002");
 
     private String message;
     private String code;
@@ -42,5 +43,9 @@ public enum ErrorCodeEnum {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public static String pin0002GetMessage(Integer attempts) {
+        return String.format(PIN0002.message, attempts);
     }
 }
