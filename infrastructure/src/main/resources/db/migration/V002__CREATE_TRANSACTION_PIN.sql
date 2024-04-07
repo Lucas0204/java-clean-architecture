@@ -1,0 +1,10 @@
+CREATE TABLE TransactionsPin(
+    Id BIGINT NOT NULL AUTO_INCREMENT,
+    Pin VARCHAR(50) NOT NULL,
+    Attempt INT NOT NULL,
+    Blocked Bool NOT NULL,
+    CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt DATETIME,
+
+    PRIMARY KEY (Id)
+);
