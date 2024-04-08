@@ -1,4 +1,4 @@
-package com.ca.entity;
+package com.ca.infrastructure.entity;
 
 import com.ca.core.domain.enums.TransactionStatusEnum;
 import jakarta.persistence.*;
@@ -38,6 +38,6 @@ public class TransactionEntity {
     @Column(name = "CreatedAt", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "UpdatedAt", nullable = false)
+    @Column(name = "UpdatedAt")
     private LocalDateTime updatedAt;
 }

@@ -1,6 +1,6 @@
-package com.ca.repository;
+package com.ca.infrastructure.repository;
 
-import com.ca.entity.UserEntity;
+import com.ca.infrastructure.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

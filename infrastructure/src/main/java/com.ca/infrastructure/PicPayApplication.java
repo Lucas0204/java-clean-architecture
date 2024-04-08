@@ -1,4 +1,4 @@
-package com.ca;
+package com.ca.infrastructure;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
